@@ -8,6 +8,8 @@ enum InvoiceType: string
     case ServiceCharge = 'service_charge';
     case CautionFee = 'caution_fee';
     case InspectionFee = 'inspection_fee';
+    case AgentFee = 'agent_fee';
+    case LegalFee = 'legal_fee';
     case Miscellaneous = 'miscellaneous';
 
     public function label(): string
@@ -17,6 +19,8 @@ enum InvoiceType: string
             self::ServiceCharge => 'Service Charge',
             self::CautionFee => 'Caution Fee',
             self::InspectionFee => 'Inspection Fee',
+            self::AgentFee => 'Agent Fee',
+            self::LegalFee => 'Legal Fee',
             self::Miscellaneous => 'Miscellaneous',
         };
     }

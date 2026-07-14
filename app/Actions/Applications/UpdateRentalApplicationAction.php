@@ -26,6 +26,8 @@ class UpdateRentalApplicationAction
             $application->fill([
                 'status' => $status,
                 'review_notes' => $payload['review_notes'] ?? null,
+                'agent_fee_amount' => $payload['agent_fee_amount'] ?? 0,
+                'legal_fee_amount' => $payload['legal_fee_amount'] ?? 0,
                 'reviewed_by' => $actor->getKey(),
                 'decided_at' => in_array($status, [RentalApplicationStatus::Approved, RentalApplicationStatus::Rejected, RentalApplicationStatus::Converted], true) ? now() : null,
             ])->save();
@@ -37,7 +39,11 @@ class UpdateRentalApplicationAction
                 action: 'rental_application_updated',
                 description: "Rental application #{$application->getKey()} updated to {$application->status->label()}.",
                 subject: $application,
-                metadata: ['status' => $application->status->value],
+                metadata: [
+                    'status' => $application->status->value,
+                    'agent_fee_amount' => $application->agent_fee_amount,
+                    'legal_fee_amount' => $application->legal_fee_amount,
+                ],
             );
 
             if ($application->applicant) {

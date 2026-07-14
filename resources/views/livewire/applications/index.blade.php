@@ -2,8 +2,8 @@
     <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
             <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Leasing</p>
-            <h1 class="text-2xl font-semibold text-zinc-950 dark:text-white">Rental Applications</h1>
-            <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-300">Review public applications, inspect supporting documents, and push each applicant through the decision queue.</p>
+            <h1 class="text-2xl font-semibold text-zinc-950 dark:text-white">{{ $isTenant ? 'My Rental Applications' : 'Rental Applications' }}</h1>
+            <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-300">{{ $isTenant ? 'Track submitted applications, review decisions, and any approved fees from one place.' : 'Review public applications, inspect supporting documents, set flexible fees, and push each applicant through the decision queue.' }}</p>
         </div>
         <div class="grid gap-3 sm:grid-cols-2">
             <div>
@@ -20,8 +20,10 @@
             </select>
             </div>
             <div class="sm:col-span-2">
-                <a href="{{ route('exports.show', ['type' => 'applications', 'q' => $search, 'status' => $status]) }}" class="inline-flex rounded-full border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-900 transition hover:border-zinc-950 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:border-white/30">Export CSV</a>
-                <a href="{{ route('reports.premium', ['type' => 'applications', 'q' => $search, 'status' => $status]) }}" target="_blank" class="ml-2 inline-flex rounded-full bg-zinc-950 px-4 py-2 text-sm font-medium text-white dark:bg-white dark:text-zinc-950">Premium PDF</a>
+                @unless ($isTenant)
+                    <a href="{{ route('exports.show', ['type' => 'applications', 'q' => $search, 'status' => $status]) }}" class="inline-flex rounded-full border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-900 transition hover:border-zinc-950 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:border-white/30">Export CSV</a>
+                    <a href="{{ route('reports.premium', ['type' => 'applications', 'q' => $search, 'status' => $status]) }}" target="_blank" class="ml-2 inline-flex rounded-full bg-zinc-950 px-4 py-2 text-sm font-medium text-white dark:bg-white dark:text-zinc-950">Premium PDF</a>
+                @endunless
             </div>
         </div>
     </div>
@@ -90,7 +92,31 @@
                             </section>
                         @endif
 
-                        @if ($application->getMedia('documents')->isNotEmpty())
+                        <section class="rounded-2xl border border-zinc-200 bg-white p-4 dark:border-white/10 dark:bg-zinc-900/70">
+                            <h3 class="text-sm font-semibold text-zinc-950 dark:text-white">Application Fees</h3>
+                            <div class="mt-3 grid gap-3 text-sm sm:grid-cols-2">
+                                <div class="rounded-2xl bg-zinc-50 p-3 dark:bg-white/5">
+                                    <p class="text-xs font-medium uppercase text-zinc-500 dark:text-zinc-400">Agent fee</p>
+                                    <p class="mt-1 font-semibold text-zinc-950 dark:text-white">NGN {{ number_format((float) $application->agent_fee_amount, 2) }}</p>
+                                </div>
+                                <div class="rounded-2xl bg-zinc-50 p-3 dark:bg-white/5">
+                                    <p class="text-xs font-medium uppercase text-zinc-500 dark:text-zinc-400">Legal fee</p>
+                                    <p class="mt-1 font-semibold text-zinc-950 dark:text-white">NGN {{ number_format((float) $application->legal_fee_amount, 2) }}</p>
+                                </div>
+                            </div>
+                            @if ($isTenant && ((float) $application->agent_fee_amount > 0 || (float) $application->legal_fee_amount > 0))
+                                <p class="mt-3 text-xs leading-5 text-zinc-500 dark:text-zinc-400">These fees are set during review and may be invoiced after approval or tenancy conversion.</p>
+                            @endif
+                        </section>
+
+                        @if ($application->review_notes)
+                            <section class="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 dark:border-emerald-500/20 dark:bg-emerald-500/10">
+                                <h3 class="text-sm font-semibold text-emerald-950 dark:text-emerald-100">Review note</h3>
+                                <p class="mt-2 whitespace-pre-line break-words text-sm leading-6 text-emerald-900 dark:text-emerald-100/90">{{ $application->review_notes }}</p>
+                            </section>
+                        @endif
+
+                        @if (! $isTenant && $application->getMedia('documents')->isNotEmpty())
                             <section class="rounded-2xl border border-zinc-200 bg-white p-4 dark:border-white/10 dark:bg-zinc-900/70">
                                 <h3 class="text-sm font-semibold text-zinc-950 dark:text-white">Supporting documents</h3>
                                 <div class="mt-3 grid gap-2 sm:grid-cols-2">
@@ -106,10 +132,25 @@
                         <x-activity-timeline :logs="$application->activityLogs" empty="No application activity has been recorded yet." />
                     </div>
 
-                    <form wire:submit="save({{ $application->id }})" class="border-t border-zinc-200 bg-zinc-50 p-5 dark:border-white/10 dark:bg-white/5 xl:border-l xl:border-t-0">
+                    @if ($isTenant)
+                        <aside class="border-t border-zinc-200 bg-zinc-50 p-5 dark:border-white/10 dark:bg-white/5 xl:border-l xl:border-t-0">
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-zinc-950 dark:text-white">Application progress</h3>
+                                    <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-300">Your application is currently marked as {{ $application->status->label() }}.</p>
+                                </div>
+                                <div class="rounded-2xl border border-zinc-200 bg-white p-4 text-sm dark:border-white/10 dark:bg-zinc-950">
+                                    <p class="text-xs font-medium uppercase text-zinc-500 dark:text-zinc-400">Reviewed by</p>
+                                    <p class="mt-1 text-zinc-900 dark:text-zinc-100">{{ $application->reviewer?->name ?? 'Review team pending' }}</p>
+                                </div>
+                                <a href="{{ route('marketplace.show', $application->property) }}" class="inline-flex rounded-full bg-zinc-950 px-4 py-2 text-sm font-medium text-white dark:bg-white dark:text-zinc-950">View property</a>
+                            </div>
+                        </aside>
+                    @else
+                    <form wire:submit="save({{ $application->id }})" class="space-y-4 border-t border-zinc-200 bg-zinc-50 p-5 dark:border-white/10 dark:bg-white/5 xl:border-l xl:border-t-0">
                         <div class="mb-4">
                             <h3 class="text-sm font-semibold text-zinc-950 dark:text-white">Review application</h3>
-                            <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-300">Update the decision status and leave review notes for the applicant record.</p>
+                            <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-300">Update the decision status, fee amounts, and review notes for the applicant record.</p>
                         </div>
 
                         <div>
@@ -121,11 +162,20 @@
                             </select>
                         </div>
                         <div>
+                            <label class="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-200">Agent fee</label>
+                            <input type="number" min="0" step="0.01" wire:model="agentFeeAmounts.{{ $application->id }}" class="w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-950 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-white/10 dark:bg-zinc-950 dark:text-white">
+                        </div>
+                        <div>
+                            <label class="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-200">Legal fee</label>
+                            <input type="number" min="0" step="0.01" wire:model="legalFeeAmounts.{{ $application->id }}" class="w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-950 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-white/10 dark:bg-zinc-950 dark:text-white">
+                        </div>
+                        <div>
                             <label class="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-200">Review notes</label>
                             <textarea rows="5" wire:model="reviewNotes.{{ $application->id }}" class="w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-950 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-white/10 dark:bg-zinc-950 dark:text-white"></textarea>
                         </div>
                         <button type="submit" wire:loading.attr="disabled" class="mt-4 rounded-full bg-zinc-950 px-4 py-2 text-sm font-medium text-white disabled:cursor-not-allowed disabled:opacity-50 dark:bg-white dark:text-zinc-950">Save review</button>
                     </form>
+                    @endif
                 </div>
             </article>
         @empty

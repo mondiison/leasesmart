@@ -57,6 +57,7 @@ class AppNavigation
                         ['label' => 'Maintenance', 'icon' => 'wrench-screwdriver', 'href' => static::path('maintenance.index'), 'current' => request()->routeIs('maintenance.*')],
                     ],
                     Role::Tenant => [
+                        ['label' => 'Applications', 'icon' => 'clipboard-document-list', 'href' => static::path('applications.index'), 'current' => request()->routeIs('applications.*')],
                         ['label' => 'Tenancy', 'icon' => 'key', 'href' => static::path('tenancies.index'), 'current' => request()->routeIs('tenancies.*')],
                         ['label' => 'Billing', 'icon' => 'banknotes', 'href' => static::path('billing.index'), 'current' => request()->routeIs('billing.*')],
                         ['label' => 'Support', 'icon' => 'lifebuoy', 'href' => static::path('maintenance.index'), 'current' => request()->routeIs('maintenance.*')],

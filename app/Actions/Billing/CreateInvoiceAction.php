@@ -85,7 +85,7 @@ class CreateInvoiceAction
         return match ($type) {
             InvoiceType::Rent => (float) $tenancy->rent_amount,
             InvoiceType::ServiceCharge => (float) $tenancy->service_charge_amount,
-            InvoiceType::CautionFee, InvoiceType::InspectionFee, InvoiceType::Miscellaneous => (function () use ($payload): float {
+            InvoiceType::CautionFee, InvoiceType::InspectionFee, InvoiceType::AgentFee, InvoiceType::LegalFee, InvoiceType::Miscellaneous => (function () use ($payload): float {
                 $amount = $payload['amount'] ?? null;
 
                 if ($amount === null || (float) $amount <= 0) {
@@ -105,6 +105,8 @@ class CreateInvoiceAction
                 InvoiceType::ServiceCharge => "Service charge for {$tenancy->property->title}",
                 InvoiceType::CautionFee => "Caution fee for {$tenancy->property->title}",
                 InvoiceType::InspectionFee => "Inspection fee for {$tenancy->property->title}",
+                InvoiceType::AgentFee => "Agent fee for {$tenancy->property->title}",
+                InvoiceType::LegalFee => "Legal fee for {$tenancy->property->title}",
                 InvoiceType::Miscellaneous => 'Miscellaneous billing item',
             };
     }

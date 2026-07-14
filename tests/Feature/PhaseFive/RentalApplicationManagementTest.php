@@ -200,12 +200,16 @@ test('admins can update rental application statuses and notify the applicant', f
         ->test(ApplicationsIndex::class)
         ->set("statusUpdates.{$application->id}", RentalApplicationStatus::Approved->value)
         ->set("reviewNotes.{$application->id}", 'Income and timeline look good.')
+        ->set("agentFeeAmounts.{$application->id}", '150000')
+        ->set("legalFeeAmounts.{$application->id}", '75000')
         ->call('save', $application->id)
         ->assertHasNoErrors();
 
     expect($application->fresh()->status)->toBe(RentalApplicationStatus::Approved);
     expect($application->fresh()->reviewed_by)->toBe($admin->id);
     expect($application->fresh()->decided_at)->not->toBeNull();
+    expect($application->fresh()->agent_fee_amount)->toBe('150000.00');
+    expect($application->fresh()->legal_fee_amount)->toBe('75000.00');
 
     Notification::assertSentTo($applicant, RentalApplicationStatusUpdatedNotification::class);
 
@@ -215,12 +219,65 @@ test('admins can update rental application statuses and notify the applicant', f
     ]);
 });
 
-test('tenants cannot access the rental applications management queue', function () use ($makeTenant) {
+test('tenants can view their own rental applications and statuses', function () use ($makeAdmin, $makeLandlord, $makeTenant) {
     $this->seed(RoleAndPermissionSeeder::class);
 
+    $admin = $makeAdmin();
+    $landlord = $makeLandlord();
     $tenant = $makeTenant();
+    $otherTenant = $makeTenant();
+
+    $property = Property::factory()->create([
+        'title' => 'Tenant Visible Heights',
+        'landlord_id' => $landlord->landlordProfile->id,
+        'publish_status' => PropertyPublishStatus::Published,
+        'published_at' => now()->subDay(),
+        'created_by' => $admin->id,
+        'updated_by' => $admin->id,
+    ]);
+
+    $unit = PropertyUnit::factory()->create([
+        'property_id' => $property->id,
+        'unit_name' => 'B2',
+        'is_listed' => true,
+        'occupancy_status' => UnitOccupancyStatus::Vacant,
+    ]);
+
+    RentalApplication::query()->create([
+        'property_id' => $property->id,
+        'property_unit_id' => $unit->id,
+        'applicant_user_id' => $tenant->id,
+        'status' => RentalApplicationStatus::Approved,
+        'source' => 'marketplace',
+        'applicant_name' => $tenant->name,
+        'applicant_email' => $tenant->email,
+        'applicant_phone' => '08034444444',
+        'review_notes' => 'Approved pending payment.',
+        'agent_fee_amount' => 120000,
+        'legal_fee_amount' => 60000,
+        'submitted_at' => now(),
+    ]);
+
+    RentalApplication::query()->create([
+        'property_id' => $property->id,
+        'property_unit_id' => $unit->id,
+        'applicant_user_id' => $otherTenant->id,
+        'status' => RentalApplicationStatus::Submitted,
+        'source' => 'marketplace',
+        'applicant_name' => 'Other Applicant',
+        'applicant_email' => $otherTenant->email,
+        'applicant_phone' => '08035555555',
+        'submitted_at' => now(),
+    ]);
 
     $this->actingAs($tenant)
         ->get(route('applications.index'))
-        ->assertForbidden();
+        ->assertOk()
+        ->assertSee('My Rental Applications')
+        ->assertSee('Tenant Visible Heights')
+        ->assertSee('Approved')
+        ->assertSee('Approved pending payment.')
+        ->assertSee('120,000.00')
+        ->assertSee('60,000.00')
+        ->assertDontSee('Other Applicant');
 });

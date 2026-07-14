@@ -31,6 +31,16 @@ class Index extends Component
      */
     public array $reviewNotes = [];
 
+    /**
+     * @var array<int, string>
+     */
+    public array $agentFeeAmounts = [];
+
+    /**
+     * @var array<int, string>
+     */
+    public array $legalFeeAmounts = [];
+
     public function mount(): void
     {
         $this->authorize('viewAny', RentalApplication::class);
@@ -54,17 +64,23 @@ class Index extends Component
         $payload = [
             'status' => $this->statusUpdates[$applicationId] ?? $application->status->value,
             'review_notes' => $this->reviewNotes[$applicationId] ?? null,
+            'agent_fee_amount' => $this->agentFeeAmounts[$applicationId] ?? 0,
+            'legal_fee_amount' => $this->legalFeeAmounts[$applicationId] ?? 0,
         ];
 
         validator($payload, [
             'status' => ['required'],
             'review_notes' => ['nullable', 'string', 'max:2500'],
+            'agent_fee_amount' => ['nullable', 'numeric', 'min:0'],
+            'legal_fee_amount' => ['nullable', 'numeric', 'min:0'],
         ])->validate();
 
         $updated = $updateRentalApplicationAction->execute(auth()->user(), $application, $payload);
 
         $this->statusUpdates[$applicationId] = $updated->status->value;
         $this->reviewNotes[$applicationId] = $updated->review_notes ?? '';
+        $this->agentFeeAmounts[$applicationId] = (string) $updated->agent_fee_amount;
+        $this->legalFeeAmounts[$applicationId] = (string) $updated->legal_fee_amount;
 
         $this->toast('Rental application updated successfully.');
     }
@@ -99,10 +115,13 @@ class Index extends Component
         foreach ($applications as $application) {
             $this->statusUpdates[$application->id] ??= $application->status->value;
             $this->reviewNotes[$application->id] ??= $application->review_notes ?? '';
+            $this->agentFeeAmounts[$application->id] ??= (string) $application->agent_fee_amount;
+            $this->legalFeeAmounts[$application->id] ??= (string) $application->legal_fee_amount;
         }
 
         return view('livewire.applications.index', [
             'applications' => $applications,
+            'isTenant' => auth()->user()->hasRole('tenant'),
             ...RentalApplicationOptions::forForms(),
         ])->layout('components.layouts.app');
     }

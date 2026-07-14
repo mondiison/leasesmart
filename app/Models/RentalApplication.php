@@ -36,6 +36,8 @@ class RentalApplication extends Model implements HasMedia
         'preferred_move_in_date',
         'message',
         'review_notes',
+        'agent_fee_amount',
+        'legal_fee_amount',
         'submitted_at',
         'decided_at',
     ];
@@ -48,6 +50,8 @@ class RentalApplication extends Model implements HasMedia
         return [
             'status' => RentalApplicationStatus::class,
             'monthly_income' => 'decimal:2',
+            'agent_fee_amount' => 'decimal:2',
+            'legal_fee_amount' => 'decimal:2',
             'preferred_move_in_date' => 'date',
             'submitted_at' => 'datetime',
             'decided_at' => 'datetime',
@@ -102,6 +106,14 @@ class RentalApplication extends Model implements HasMedia
 
         if ($user->hasRole('landlord') && $user->landlordProfile) {
             return $query->whereHas('property', fn (Builder $propertyQuery) => $propertyQuery->where('landlord_id', $user->landlordProfile->getKey()));
+        }
+
+        if ($user->hasRole('tenant')) {
+            return $query->where(function (Builder $tenantQuery) use ($user): void {
+                $tenantQuery
+                    ->where('applicant_user_id', $user->getKey())
+                    ->orWhere('applicant_email', $user->email);
+            });
         }
 
         return $query->whereRaw('1 = 0');

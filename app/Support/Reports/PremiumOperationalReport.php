@@ -198,7 +198,7 @@ class PremiumOperationalReport
     {
         return $records->take(20)->map(function ($record) use ($type): array {
             return match ($type) {
-                'applications' => [$record->applicant_name, $record->property?->title, $record->unit?->unit_name, $record->status->label()],
+                'applications' => [$record->applicant_name, $record->property?->title, $record->unit?->unit_name, $record->status->label(), 'NGN '.number_format((float) $record->agent_fee_amount + (float) $record->legal_fee_amount, 2)],
                 'tenancies' => [$record->tenant_name, $record->property?->title, $record->unit?->unit_name, $record->status->label()],
                 'maintenance' => [$record->title, $record->property?->title, $record->priority->label(), $record->status->label()],
                 'inspections' => [$record->requester_name, $record->property?->title, $record->requested_for_date?->toDateString(), $record->status->label()],

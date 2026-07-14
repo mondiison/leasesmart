@@ -102,7 +102,7 @@
                                     <div>
                                         <label class="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-200">Custom amount</label>
                                         <input type="number" step="0.01" wire:model.live="invoiceAmounts.{{ $tenancy->id }}" class="w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-950 dark:border-white/10 dark:bg-zinc-950 dark:text-white" />
-                                        <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Required for caution fee, inspection fee, and miscellaneous invoices.</p>
+                                        <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Required for caution, inspection, agent, legal, and miscellaneous invoices.</p>
                                     </div>
                                 </div>
 

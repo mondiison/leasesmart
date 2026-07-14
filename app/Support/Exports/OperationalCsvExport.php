@@ -52,7 +52,7 @@ class OperationalCsvExport
     protected function headings(string $type): array
     {
         return match ($type) {
-            'applications' => ['Submitted', 'Applicant', 'Email', 'Phone', 'Property', 'Unit', 'Status', 'Preferred Move In', 'Reviewer'],
+            'applications' => ['Submitted', 'Applicant', 'Email', 'Phone', 'Property', 'Unit', 'Status', 'Agent Fee', 'Legal Fee', 'Preferred Move In', 'Reviewer'],
             'tenancies' => ['Tenant', 'Email', 'Phone', 'Property', 'Unit', 'Status', 'Lease Start', 'Lease End', 'Rent', 'Service Charge', 'Billing Cycle'],
             'maintenance' => ['Reported', 'Title', 'Property', 'Unit', 'Tenant', 'Category', 'Priority', 'Status', 'Assigned To'],
             'inspections' => ['Requested Date', 'Requester', 'Email', 'Phone', 'Property', 'Unit', 'Status', 'Scheduled At', 'Handler'],
@@ -112,6 +112,8 @@ class OperationalCsvExport
                         $application->property?->title ?? '',
                         $application->unit?->unit_name ?? '',
                         $application->status->label(),
+                        (string) $application->agent_fee_amount,
+                        (string) $application->legal_fee_amount,
                         $application->preferred_move_in_date?->toDateString() ?? '',
                         $application->reviewer?->name ?? '',
                     ];
