@@ -105,6 +105,51 @@ test('public visitors can submit rental applications with documents', function (
     ]);
 });
 
+test('public visitors can submit rental applications with skipped optional fields', function () use ($makeAdmin, $makeLandlord) {
+    Notification::fake();
+    $this->seed(RoleAndPermissionSeeder::class);
+
+    $admin = $makeAdmin();
+    $landlord = $makeLandlord();
+
+    $property = Property::factory()->create([
+        'title' => 'Quiet Court',
+        'slug' => 'quiet-court',
+        'landlord_id' => $landlord->landlordProfile->id,
+        'publish_status' => PropertyPublishStatus::Published,
+        'published_at' => now()->subDay(),
+        'created_by' => $admin->id,
+        'updated_by' => $admin->id,
+    ]);
+
+    $unit = PropertyUnit::factory()->create([
+        'property_id' => $property->id,
+        'unit_name' => 'C3',
+        'occupancy_status' => UnitOccupancyStatus::Vacant,
+        'billing_cycle' => BillingCycle::Yearly,
+        'is_listed' => true,
+    ]);
+
+    Livewire::test(RentalApplicationForm::class, ['property' => $property])
+        ->set('property_unit_id', $unit->id)
+        ->set('applicant_name', 'Monday Bulus')
+        ->set('applicant_email', 'monday@example.com')
+        ->set('applicant_phone', '07063218823')
+        ->set('employment_status', 'Self-employed')
+        ->set('employer_name', '')
+        ->set('monthly_income', '')
+        ->set('preferred_move_in_date', '')
+        ->set('message', 'Just need a peaceful environment.')
+        ->call('save')
+        ->assertHasNoErrors();
+
+    $application = RentalApplication::query()->where('applicant_email', 'monday@example.com')->firstOrFail();
+
+    expect($application->monthly_income)->toBeNull();
+    expect($application->employer_name)->toBeNull();
+    expect($application->preferred_move_in_date)->toBeNull();
+});
+
 test('landlords only see rental applications for their portfolio', function () use ($makeAdmin, $makeLandlord) {
     $this->seed(RoleAndPermissionSeeder::class);
 

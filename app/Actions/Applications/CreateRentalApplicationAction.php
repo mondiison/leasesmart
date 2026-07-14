@@ -50,11 +50,11 @@ class CreateRentalApplicationAction
                 'applicant_name' => $payload['applicant_name'],
                 'applicant_email' => $payload['applicant_email'],
                 'applicant_phone' => $payload['applicant_phone'],
-                'employment_status' => $payload['employment_status'] ?? null,
-                'employer_name' => $payload['employer_name'] ?? null,
-                'monthly_income' => $payload['monthly_income'] ?? null,
-                'preferred_move_in_date' => $payload['preferred_move_in_date'] ?? null,
-                'message' => $payload['message'] ?? null,
+                'employment_status' => $this->optionalString($payload['employment_status'] ?? null),
+                'employer_name' => $this->optionalString($payload['employer_name'] ?? null),
+                'monthly_income' => $this->optionalDecimal($payload['monthly_income'] ?? null),
+                'preferred_move_in_date' => $this->optionalString($payload['preferred_move_in_date'] ?? null),
+                'message' => $this->optionalString($payload['message'] ?? null),
                 'submitted_at' => now(),
             ]);
 
@@ -99,5 +99,25 @@ class CreateRentalApplicationAction
             $property->landlord?->user,
             ...\App\Models\User::role('admin')->get(),
         ])->filter(fn ($user) => $user !== null)->unique('id')->values();
+    }
+
+    protected function optionalString(mixed $value): ?string
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        $value = trim((string) $value);
+
+        return $value === '' ? null : $value;
+    }
+
+    protected function optionalDecimal(mixed $value): ?float
+    {
+        if ($value === null || trim((string) $value) === '') {
+            return null;
+        }
+
+        return (float) $value;
     }
 }
