@@ -20,10 +20,11 @@
 
                 <div
                     data-marketplace-stats-slider
-                    x-data="marketplaceStatsSlider"
-                    x-on:mouseenter="stop()"
-                    x-on:mouseleave="start()"
-                    class="mx-auto mt-8 max-w-2xl"
+                    x-data="{ active: 0, total: 2, timer: null }"
+                    x-init="timer = setInterval(() => active = (active + 1) % total, 5200)"
+                    x-on:mouseenter="clearInterval(timer)"
+                    x-on:mouseleave="clearInterval(timer); timer = setInterval(() => active = (active + 1) % total, 5200)"
+                    class="mx-auto mt-8 hidden max-w-2xl sm:block"
                 >
                     <div class="relative overflow-hidden rounded-[1.6rem] bg-white/45 p-2 shadow-[0_18px_48px_rgba(15,23,42,0.06)] dark:bg-white/5">
                         <div class="flex transition-transform duration-500 ease-out" x-bind:style="'transform: translateX(-' + (active * 100) + '%);'">
@@ -96,21 +97,25 @@
                             </div>
                         </div>
 
-                        <button type="button" x-on:click="prev()" class="absolute left-3 top-1/2 grid size-9 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-zinc-600 shadow-lg shadow-zinc-950/10 ring-1 ring-zinc-200 transition hover:bg-sky-600 hover:text-white dark:bg-zinc-950/80 dark:text-zinc-300 dark:ring-white/10" aria-label="Previous statistics slide">
+                        <button type="button" x-on:click="active = (active + total - 1) % total" class="absolute left-3 top-1/2 hidden size-9 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-zinc-600 shadow-lg shadow-zinc-950/10 ring-1 ring-zinc-200 transition hover:bg-sky-600 hover:text-white sm:grid dark:bg-zinc-950/80 dark:text-zinc-300 dark:ring-white/10" aria-label="Previous statistics slide">
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6" />
                             </svg>
                         </button>
-                        <button type="button" x-on:click="next()" class="absolute right-3 top-1/2 grid size-9 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-zinc-600 shadow-lg shadow-zinc-950/10 ring-1 ring-zinc-200 transition hover:bg-sky-600 hover:text-white dark:bg-zinc-950/80 dark:text-zinc-300 dark:ring-white/10" aria-label="Next statistics slide">
+                        <button type="button" x-on:click="active = (active + 1) % total" class="absolute right-3 top-1/2 hidden size-9 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-zinc-600 shadow-lg shadow-zinc-950/10 ring-1 ring-zinc-200 transition hover:bg-sky-600 hover:text-white sm:grid dark:bg-zinc-950/80 dark:text-zinc-300 dark:ring-white/10" aria-label="Next statistics slide">
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
                             </svg>
                         </button>
                     </div>
 
-                    <div class="mt-3 flex items-center justify-center gap-2">
-                        <button type="button" x-on:click="go(0)" class="h-1.5 w-2 rounded-full bg-zinc-300 transition-all hover:bg-zinc-400 dark:bg-zinc-700" x-bind:class="active === 0 ? 'w-8 bg-sky-600 dark:bg-sky-500' : ''" aria-label="Show marketplace reach statistics"></button>
-                        <button type="button" x-on:click="go(1)" class="h-1.5 w-2 rounded-full bg-zinc-300 transition-all hover:bg-zinc-400 dark:bg-zinc-700" x-bind:class="active === 1 ? 'w-8 bg-sky-600 dark:bg-sky-500' : ''" aria-label="Show listing quality statistics"></button>
+                    <div class="mt-3 flex flex-row items-center justify-center gap-2">
+                        <button type="button" x-on:click="active = 0" class="grid h-5 w-10 place-items-center rounded-full" aria-label="Show marketplace reach statistics">
+                            <span class="block h-1.5 rounded-full bg-zinc-300 transition-all dark:bg-zinc-700" x-bind:class="active === 0 ? 'w-8 bg-sky-600 dark:bg-sky-500' : 'w-2 hover:bg-zinc-400'"></span>
+                        </button>
+                        <button type="button" x-on:click="active = 1" class="grid h-5 w-10 place-items-center rounded-full" aria-label="Show listing quality statistics">
+                            <span class="block h-1.5 rounded-full bg-zinc-300 transition-all dark:bg-zinc-700" x-bind:class="active === 1 ? 'w-8 bg-sky-600 dark:bg-sky-500' : 'w-2 hover:bg-zinc-400'"></span>
+                        </button>
                     </div>
                 </div>
             </div>
