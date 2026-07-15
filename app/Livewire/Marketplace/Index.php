@@ -3,6 +3,7 @@
 namespace App\Livewire\Marketplace;
 
 use App\Enums\PropertyType;
+use App\Models\PropertyAmenity;
 use App\Models\Property;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\Url;
@@ -20,20 +21,26 @@ class Index extends Component
     public string $city = '';
 
     #[Url]
-    public string $type = '';
+    public array $types = [];
 
     #[Url]
     public string $bedrooms = '';
 
+    #[Url]
+    public string $bathrooms = '';
+
     #[Url(as: 'max_rent')]
     public string $maxRent = '';
+
+    #[Url(as: 'amenities')]
+    public array $amenityIds = [];
 
     #[Url(as: 'featured', except: false)]
     public bool $featuredOnly = false;
 
     public function updating(string $name): void
     {
-        if (in_array($name, ['search', 'city', 'type', 'bedrooms', 'maxRent', 'featuredOnly'], true)) {
+        if (in_array($name, ['search', 'city', 'types', 'bedrooms', 'bathrooms', 'maxRent', 'amenityIds', 'featuredOnly'], true)) {
             $this->resetPage();
         }
     }
@@ -42,9 +49,11 @@ class Index extends Component
     {
         $this->search = '';
         $this->city = '';
-        $this->type = '';
+        $this->types = [];
         $this->bedrooms = '';
+        $this->bathrooms = '';
         $this->maxRent = '';
+        $this->amenityIds = [];
         $this->featuredOnly = false;
         $this->resetPage();
     }
@@ -73,7 +82,9 @@ class Index extends Component
             'properties' => $properties,
             'cities' => $cities,
             'propertyTypes' => PropertyType::cases(),
+            'amenities' => PropertyAmenity::query()->orderBy('name')->limit(8)->get(),
             'bedroomOptions' => [1, 2, 3, 4, 5],
+            'bathroomOptions' => [1, 2, 3, 4],
             'isHome' => request()->routeIs('home'),
         ])->layout('components.layouts.marketing', [
             'title' => request()->routeIs('home') ? 'LeaseSmart Premium' : 'Property Listings | LeaseSmart Premium',
@@ -90,8 +101,24 @@ class Index extends Component
             $query->where('city', $this->city);
         }
 
-        if ($this->type !== '') {
-            $query->where('property_type', $this->type);
+        $types = array_values(array_filter($this->types));
+
+        if ($types !== []) {
+            $query->whereIn('property_type', $types);
+        }
+
+        $amenityIds = collect($this->amenityIds)
+            ->filter()
+            ->map(fn ($amenityId) => (int) $amenityId)
+            ->values()
+            ->all();
+
+        if ($amenityIds !== []) {
+            $query->where(function (Builder $amenityQuery) use ($amenityIds): void {
+                $amenityQuery
+                    ->whereHas('amenities', fn (Builder $query) => $query->whereIn('property_amenities.id', $amenityIds))
+                    ->orWhereHas('publicUnits.amenities', fn (Builder $query) => $query->whereIn('property_amenities.id', $amenityIds));
+            });
         }
 
         if ($this->search !== '') {
@@ -120,6 +147,10 @@ class Index extends Component
 
         if ($this->bedrooms !== '') {
             $query->where('bedrooms', '>=', (int) $this->bedrooms);
+        }
+
+        if ($this->bathrooms !== '') {
+            $query->where('bathrooms', '>=', (int) $this->bathrooms);
         }
 
         if ($this->maxRent !== '') {
