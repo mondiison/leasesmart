@@ -3,8 +3,8 @@
 namespace App\Livewire\Marketplace;
 
 use App\Enums\PropertyType;
-use App\Models\PropertyAmenity;
 use App\Models\Property;
+use App\Models\PropertyAmenity;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -78,9 +78,19 @@ class Index extends Component
             ->filter()
             ->values();
 
+        $marketplaceTotals = Property::query()
+            ->publiclyVisible()
+            ->withCount('publicUnits')
+            ->get();
+
         return view('livewire.marketplace.index', [
             'properties' => $properties,
             'cities' => $cities,
+            'marketplaceStats' => [
+                'listings' => $marketplaceTotals->count(),
+                'cities' => $cities->count(),
+                'units' => $marketplaceTotals->sum('public_units_count'),
+            ],
             'propertyTypes' => PropertyType::cases(),
             'amenities' => PropertyAmenity::query()->orderBy('name')->limit(8)->get(),
             'bedroomOptions' => [1, 2, 3, 4, 5],
