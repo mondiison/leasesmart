@@ -18,8 +18,8 @@
                         Compare polished rental listings by location, budget, bedrooms, amenities, and viewing readiness without digging through unfinished inventory.
                 </p>
 
-                <div class="mx-auto mt-8 grid max-w-2xl grid-cols-3 gap-3">
-                    <div class="rounded-3xl bg-white/75 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8 [&:hover_.stat-icon]:border-sky-600 [&:hover_.stat-icon]:bg-sky-600 [&:hover_.stat-icon]:text-white">
+                <div class="mx-auto mt-8 flex max-w-2xl flex-row items-stretch justify-center gap-3">
+                    <div class="w-1/3 min-w-0 rounded-3xl bg-white/75 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8 [&:hover_.stat-icon]:border-sky-600 [&:hover_.stat-icon]:bg-sky-600 [&:hover_.stat-icon]:text-white">
                         <div class="stat-icon mx-auto grid size-12 place-items-center rounded-full border border-sky-200 bg-white text-sky-700 transition dark:border-sky-300/20 dark:bg-white/5 dark:text-sky-200">
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 21V6l8-3 8 3v15" />
@@ -29,7 +29,7 @@
                         <p class="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['listings'] }}</p>
                         <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Listings</p>
                     </div>
-                    <div class="rounded-3xl bg-white/75 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8 [&:hover_.stat-icon]:border-sky-600 [&:hover_.stat-icon]:bg-sky-600 [&:hover_.stat-icon]:text-white">
+                    <div class="w-1/3 min-w-0 rounded-3xl bg-white/75 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8 [&:hover_.stat-icon]:border-sky-600 [&:hover_.stat-icon]:bg-sky-600 [&:hover_.stat-icon]:text-white">
                         <div class="stat-icon mx-auto grid size-12 place-items-center rounded-full border border-sky-200 bg-white text-sky-700 transition dark:border-sky-300/20 dark:bg-white/5 dark:text-sky-200">
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 21V7l5-3 5 3v14" />
@@ -39,7 +39,7 @@
                         <p class="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['cities'] }}</p>
                         <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Cities</p>
                     </div>
-                    <div class="rounded-3xl bg-white/75 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8 [&:hover_.stat-icon]:border-sky-600 [&:hover_.stat-icon]:bg-sky-600 [&:hover_.stat-icon]:text-white">
+                    <div class="w-1/3 min-w-0 rounded-3xl bg-white/75 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8 [&:hover_.stat-icon]:border-sky-600 [&:hover_.stat-icon]:bg-sky-600 [&:hover_.stat-icon]:text-white">
                         <div class="stat-icon mx-auto grid size-12 place-items-center rounded-full border border-sky-200 bg-white text-sky-700 transition dark:border-sky-300/20 dark:bg-white/5 dark:text-sky-200">
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 11h18v8M5 11V7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v4M7 11V9h4v2M13 11V9h4v2" />
