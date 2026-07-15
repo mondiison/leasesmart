@@ -8,10 +8,8 @@
             </nav>
         @endif
 
-        <div class="relative overflow-hidden rounded-[2rem] border border-white bg-[#fbfcfc] p-5 shadow-[0_30px_90px_rgba(15,23,42,0.10)] ring-1 ring-zinc-950/5 sm:p-8 lg:p-10 dark:border-white/10 dark:bg-zinc-900">
-            <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-300 to-transparent"></div>
-
-            <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
+        <div class="rounded-[2rem] bg-[#fbfcfc] p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)] sm:p-8 lg:p-10 dark:bg-zinc-900">
+            <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start">
                 <div class="min-w-0">
                     <p class="text-xs font-semibold uppercase tracking-[0.26em] text-sky-700 dark:text-sky-300">Verified homes, clear terms, faster viewings</p>
                     <h1 class="mt-5 max-w-4xl text-4xl font-semibold leading-[1.02] tracking-tight text-zinc-950 sm:text-6xl dark:text-white">
@@ -37,10 +35,11 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="mt-8 rounded-[1.6rem] border border-zinc-200/80 bg-white p-2 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-zinc-950/70">
-                <div class="grid gap-2 lg:grid-cols-[minmax(220px,1.5fr)_minmax(150px,0.8fr)_minmax(150px,0.8fr)_minmax(150px,0.8fr)_140px] lg:items-center">
-                    <label for="search" class="flex min-w-0 items-center gap-3 rounded-[1.15rem] px-4 py-3 transition focus-within:bg-zinc-50 dark:focus-within:bg-white/5">
+        <div class="mt-5 rounded-[1.35rem] bg-white p-2 shadow-[0_18px_50px_rgba(15,23,42,0.08)] dark:bg-zinc-950/70">
+            <div class="grid gap-2 md:grid-cols-2 lg:grid-cols-[minmax(260px,1.5fr)_minmax(150px,0.8fr)_minmax(170px,0.9fr)_minmax(150px,0.75fr)_128px] lg:items-center">
+                    <label for="search" class="flex min-w-0 items-center gap-2 rounded-2xl px-3 py-2.5 transition focus-within:bg-zinc-50 dark:focus-within:bg-white/5">
                         <svg class="size-5 shrink-0 text-sky-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M20 10c0 5-8 11-8 11s-8-6-8-11a8 8 0 1 1 16 0Z" />
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
@@ -51,8 +50,8 @@
                         </span>
                     </label>
 
-                    <label for="city" class="flex min-w-0 items-center gap-3 rounded-[1.15rem] border-t border-zinc-100 px-4 py-3 lg:border-l lg:border-t-0 dark:border-white/10">
-                        <span class="grid size-9 shrink-0 place-items-center rounded-full bg-zinc-100 text-zinc-500 dark:bg-white/10 dark:text-zinc-300">
+                    <label for="city" class="flex min-w-0 items-center gap-2 rounded-2xl border-t border-zinc-100 px-3 py-2.5 md:border-l md:border-t-0 dark:border-white/10">
+                        <span class="grid size-8 shrink-0 place-items-center rounded-full bg-zinc-100 text-zinc-500 dark:bg-white/10 dark:text-zinc-300">
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 21V7l5-3 5 3v14" />
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 10h6v11M8 9h.01M8 13h.01M8 17h.01M17 14h.01M17 18h.01" />
@@ -69,8 +68,8 @@
                         </span>
                     </label>
 
-                    <label for="hero-budget" class="flex min-w-0 items-center gap-3 rounded-[1.15rem] border-t border-zinc-100 px-4 py-3 lg:border-l lg:border-t-0 dark:border-white/10">
-                        <span class="grid size-9 shrink-0 place-items-center rounded-full bg-zinc-100 text-zinc-500 dark:bg-white/10 dark:text-zinc-300">
+                    <label for="hero-budget" class="flex min-w-0 items-center gap-2 rounded-2xl border-t border-zinc-100 px-3 py-2.5 lg:border-l lg:border-t-0 dark:border-white/10">
+                        <span class="grid size-8 shrink-0 place-items-center rounded-full bg-zinc-100 text-zinc-500 dark:bg-white/10 dark:text-zinc-300">
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M6 12h12M8 19V5l8 14V5" />
                             </svg>
@@ -88,8 +87,8 @@
                         </span>
                     </label>
 
-                    <label for="hero-beds" class="flex min-w-0 items-center gap-3 rounded-[1.15rem] border-t border-zinc-100 px-4 py-3 lg:border-l lg:border-t-0 dark:border-white/10">
-                        <span class="grid size-9 shrink-0 place-items-center rounded-full bg-zinc-100 text-zinc-500 dark:bg-white/10 dark:text-zinc-300">
+                    <label for="hero-beds" class="flex min-w-0 items-center gap-2 rounded-2xl border-t border-zinc-100 px-3 py-2.5 lg:border-l lg:border-t-0 dark:border-white/10">
+                        <span class="grid size-8 shrink-0 place-items-center rounded-full bg-zinc-100 text-zinc-500 dark:bg-white/10 dark:text-zinc-300">
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 11h18v8M5 11V7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v4M7 11V9h4v2M13 11V9h4v2" />
                             </svg>
@@ -105,17 +104,16 @@
                         </span>
                     </label>
 
-                    <button type="button" class="inline-flex h-14 items-center justify-center rounded-[1.15rem] bg-sky-600 px-6 text-base font-semibold text-white shadow-lg shadow-sky-900/20 transition hover:bg-sky-700">
+                    <button type="button" class="inline-flex h-12 items-center justify-center rounded-2xl bg-sky-600 px-5 text-sm font-semibold text-white shadow-lg shadow-sky-900/15 transition hover:bg-sky-700">
                         Search
                     </button>
-                </div>
             </div>
         </div>
     </section>
 
     <section class="mx-auto mt-6 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid min-w-0 gap-6 lg:grid-cols-[290px_minmax(0,1fr)]">
-            <aside class="h-fit rounded-[1.6rem] border border-zinc-200/80 bg-white p-5 shadow-[0_20px_55px_rgba(15,23,42,0.07)] dark:border-white/10 dark:bg-white/6">
+        <div class="grid min-w-0 gap-5 rounded-[1.8rem] bg-white p-4 shadow-[0_24px_70px_rgba(15,23,42,0.08)] lg:grid-cols-[270px_minmax(0,1fr)] lg:p-5 dark:bg-zinc-900/70">
+            <aside class="h-fit rounded-[1.35rem] bg-zinc-50 p-4 dark:bg-white/6">
                 <div class="flex items-center justify-between gap-3">
                     <div>
                         <h2 class="text-sm font-semibold text-zinc-950 dark:text-white">Filters</h2>
@@ -124,13 +122,13 @@
                     <button type="button" wire:click="clearFilters" class="text-xs font-semibold text-sky-700 transition hover:text-sky-900 dark:text-sky-300 dark:hover:text-sky-200">Clear all</button>
                 </div>
 
-                <div class="mt-6 space-y-7">
+                <div class="mt-5 space-y-5">
                     <div>
                         <div class="flex items-baseline justify-between gap-3">
                             <label for="price-range" class="text-xs font-semibold text-zinc-800 dark:text-zinc-100">Price Range</label>
                             <span class="text-xs font-medium text-zinc-500 dark:text-zinc-400">{{ $maxRent === '' ? 'Any budget' : 'Up to NGN '.number_format((float) $maxRent) }}</span>
                         </div>
-                        <input id="price-range" type="range" min="1000000" max="8000000" step="250000" wire:model.live="maxRent" class="mt-4 h-1.5 w-full accent-sky-600" />
+                        <input id="price-range" type="range" min="1000000" max="8000000" step="250000" wire:model.live="maxRent" class="mt-3 h-1.5 w-full accent-sky-600" />
                         <div class="mt-2 flex justify-between text-[11px] font-medium text-zinc-400">
                             <span>NGN 1M</span>
                             <span>NGN 8M+</span>
@@ -140,29 +138,29 @@
 
                     <div>
                         <p class="text-xs font-semibold text-zinc-800 dark:text-zinc-100">Bedrooms</p>
-                        <div class="mt-3 grid grid-cols-4 gap-2">
-                            <button type="button" wire:click="$set('bedrooms', '')" class="rounded-xl border px-2 py-2 text-sm font-semibold transition {{ $bedrooms === '' ? 'border-sky-600 bg-sky-600 text-white shadow-sm' : 'border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300' }}">Any</button>
+                        <div class="mt-2 flex gap-1.5">
+                            <button type="button" wire:click="$set('bedrooms', '')" class="h-9 flex-1 rounded-lg border px-2 text-xs font-semibold transition {{ $bedrooms === '' ? 'border-sky-600 bg-sky-600 text-white shadow-sm' : 'border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300' }}">Any</button>
                             @foreach ([2, 3, 4] as $option)
-                                <button type="button" wire:click="$set('bedrooms', '{{ $option }}')" class="rounded-xl border px-2 py-2 text-sm font-semibold transition {{ $bedrooms === (string) $option ? 'border-sky-600 bg-sky-600 text-white shadow-sm' : 'border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300' }}">{{ $option }}+</button>
+                                <button type="button" wire:click="$set('bedrooms', '{{ $option }}')" class="h-9 flex-1 rounded-lg border px-2 text-xs font-semibold transition {{ $bedrooms === (string) $option ? 'border-sky-600 bg-sky-600 text-white shadow-sm' : 'border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300' }}">{{ $option }}+</button>
                             @endforeach
                         </div>
                     </div>
 
                     <div>
                         <p class="text-xs font-semibold text-zinc-800 dark:text-zinc-100">Bathrooms</p>
-                        <div class="mt-3 grid grid-cols-4 gap-2">
-                            <button type="button" wire:click="$set('bathrooms', '')" class="rounded-xl border px-2 py-2 text-sm font-semibold transition {{ $bathrooms === '' ? 'border-sky-600 bg-sky-600 text-white shadow-sm' : 'border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300' }}">Any</button>
+                        <div class="mt-2 flex gap-1.5">
+                            <button type="button" wire:click="$set('bathrooms', '')" class="h-9 flex-1 rounded-lg border px-2 text-xs font-semibold transition {{ $bathrooms === '' ? 'border-sky-600 bg-sky-600 text-white shadow-sm' : 'border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300' }}">Any</button>
                             @foreach ([1, 2, 3] as $option)
-                                <button type="button" wire:click="$set('bathrooms', '{{ $option }}')" class="rounded-xl border px-2 py-2 text-sm font-semibold transition {{ $bathrooms === (string) $option ? 'border-sky-600 bg-sky-600 text-white shadow-sm' : 'border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300' }}">{{ $option }}+</button>
+                                <button type="button" wire:click="$set('bathrooms', '{{ $option }}')" class="h-9 flex-1 rounded-lg border px-2 text-xs font-semibold transition {{ $bathrooms === (string) $option ? 'border-sky-600 bg-sky-600 text-white shadow-sm' : 'border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300' }}">{{ $option }}+</button>
                             @endforeach
                         </div>
                     </div>
 
                     <div>
                         <p class="text-xs font-semibold text-zinc-800 dark:text-zinc-100">Property Types</p>
-                        <div class="mt-3 space-y-2">
+                        <div class="mt-2 space-y-1.5">
                             @foreach ($propertyTypes as $propertyType)
-                                <label class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2.5 text-sm font-medium text-zinc-700 transition hover:border-sky-200 hover:bg-sky-50 dark:border-white/10 dark:bg-white/5 dark:text-zinc-200">
+                                <label class="flex items-center gap-2.5 rounded-lg bg-white px-3 py-2 text-xs font-medium text-zinc-700 transition hover:bg-sky-50 dark:bg-white/5 dark:text-zinc-200">
                                     <input type="checkbox" wire:model.live="types" value="{{ $propertyType->value }}" class="size-4 rounded border-zinc-300 text-sky-600 focus:ring-sky-500" />
                                     <span>{{ $propertyType->label() }}</span>
                                 </label>
@@ -172,9 +170,9 @@
 
                     <div>
                         <p class="text-xs font-semibold text-zinc-800 dark:text-zinc-100">Amenities</p>
-                        <div class="mt-3 space-y-2">
+                        <div class="mt-2 space-y-1.5">
                             @forelse ($amenities as $amenity)
-                                <label class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2.5 text-sm font-medium text-zinc-700 transition hover:border-sky-200 hover:bg-sky-50 dark:border-white/10 dark:bg-white/5 dark:text-zinc-200">
+                                <label class="flex items-center gap-2.5 rounded-lg bg-white px-3 py-2 text-xs font-medium text-zinc-700 transition hover:bg-sky-50 dark:bg-white/5 dark:text-zinc-200">
                                     <input type="checkbox" wire:model.live="amenityIds" value="{{ $amenity->id }}" class="size-4 rounded border-zinc-300 text-sky-600 focus:ring-sky-500" />
                                     <span>{{ $amenity->name }}</span>
                                 </label>
@@ -242,9 +240,9 @@
                                         </div>
 
                                         @if ($primaryUnit)
-                                            <div class="shrink-0 rounded-2xl bg-zinc-950 px-4 py-3 text-white lg:text-right dark:bg-white dark:text-zinc-950">
+                                            <div class="shrink-0 rounded-2xl bg-sky-50 px-4 py-3 text-sky-950 lg:text-right dark:bg-sky-300/10 dark:text-sky-100">
                                                 <p class="text-xl font-semibold">NGN {{ number_format((float) $primaryUnit->rent_amount) }}</p>
-                                                <p class="mt-1 text-xs font-medium text-white/65 dark:text-zinc-500">per {{ strtolower($primaryUnit->billing_cycle->label()) }}</p>
+                                                <p class="mt-1 text-xs font-medium text-sky-700/70 dark:text-sky-100/65">per {{ strtolower($primaryUnit->billing_cycle->label()) }}</p>
                                             </div>
                                         @endif
                                     </div>
