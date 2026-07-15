@@ -9,7 +9,7 @@
         @endif
 
         <div class="rounded-[2rem] bg-[#fbfcfc] p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)] sm:p-8 lg:p-10 dark:bg-zinc-900">
-            <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start">
+            <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center">
                 <div class="min-w-0">
                     <p class="text-xs font-semibold uppercase tracking-[0.26em] text-sky-700 dark:text-sky-300">Verified homes, clear terms, faster viewings</p>
                     <h1 class="mt-5 max-w-4xl text-4xl font-semibold leading-[1.02] tracking-tight text-zinc-950 sm:text-6xl dark:text-white">
@@ -20,35 +20,35 @@
                     </p>
                 </div>
 
-                <div class="grid grid-cols-3 gap-3">
-                    <div class="rounded-2xl bg-white px-4 py-4 shadow-[0_14px_35px_rgba(15,23,42,0.07)] dark:bg-white/5">
-                        <div class="mx-auto grid size-9 place-items-center rounded-full bg-sky-50 text-sky-700 dark:bg-sky-300/10 dark:text-sky-200">
+                <div class="grid grid-cols-3 gap-3 lg:self-center">
+                    <div class="group rounded-[1.35rem] bg-white/70 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8">
+                        <div class="mx-auto grid size-12 place-items-center rounded-full border border-sky-200 bg-white text-sky-700 transition group-hover:border-sky-600 group-hover:bg-sky-600 group-hover:text-white dark:border-sky-300/20 dark:bg-white/5 dark:text-sky-200 dark:group-hover:bg-sky-500">
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 21V6l8-3 8 3v15" />
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 21v-7h6v7M8 8h.01M16 8h.01" />
                             </svg>
                         </div>
-                        <p class="mt-3 text-center text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['listings'] }}</p>
-                        <p class="mt-1 text-center text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Listings</p>
+                        <p class="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['listings'] }}</p>
+                        <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Listings</p>
                     </div>
-                    <div class="rounded-2xl bg-white px-4 py-4 shadow-[0_14px_35px_rgba(15,23,42,0.07)] dark:bg-white/5">
-                        <div class="mx-auto grid size-9 place-items-center rounded-full bg-blue-50 text-blue-700 dark:bg-blue-300/10 dark:text-blue-200">
+                    <div class="group rounded-[1.35rem] bg-white/70 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8">
+                        <div class="mx-auto grid size-12 place-items-center rounded-full border border-sky-200 bg-white text-sky-700 transition group-hover:border-sky-600 group-hover:bg-sky-600 group-hover:text-white dark:border-sky-300/20 dark:bg-white/5 dark:text-sky-200 dark:group-hover:bg-sky-500">
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 21V7l5-3 5 3v14" />
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 10h6v11M8 9h.01M8 13h.01M8 17h.01M17 14h.01M17 18h.01" />
                             </svg>
                         </div>
-                        <p class="mt-3 text-center text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['cities'] }}</p>
-                        <p class="mt-1 text-center text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Cities</p>
+                        <p class="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['cities'] }}</p>
+                        <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Cities</p>
                     </div>
-                    <div class="rounded-2xl bg-white px-4 py-4 shadow-[0_14px_35px_rgba(15,23,42,0.07)] dark:bg-white/5">
-                        <div class="mx-auto grid size-9 place-items-center rounded-full bg-indigo-50 text-indigo-700 dark:bg-indigo-300/10 dark:text-indigo-200">
+                    <div class="group rounded-[1.35rem] bg-white/70 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8">
+                        <div class="mx-auto grid size-12 place-items-center rounded-full border border-sky-200 bg-white text-sky-700 transition group-hover:border-sky-600 group-hover:bg-sky-600 group-hover:text-white dark:border-sky-300/20 dark:bg-white/5 dark:text-sky-200 dark:group-hover:bg-sky-500">
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 11h18v8M5 11V7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v4M7 11V9h4v2M13 11V9h4v2" />
                             </svg>
                         </div>
-                        <p class="mt-3 text-center text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['units'] }}</p>
-                        <p class="mt-1 text-center text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Units</p>
+                        <p class="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['units'] }}</p>
+                        <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Units</p>
                     </div>
                 </div>
             </div>
