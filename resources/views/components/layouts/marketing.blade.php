@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         @include('partials.head')
     </head>
-    <body class="min-h-screen bg-[radial-gradient(circle_at_top,#fff2df,transparent_30%),linear-gradient(180deg,#fffaf2_0%,#f4f8f7_52%,#eef4f4_100%)] text-zinc-950 antialiased dark:bg-[radial-gradient(circle_at_top,#193448,transparent_28%),linear-gradient(180deg,#07111b_0%,#0c1724_50%,#09131d_100%)] dark:text-white">
+    <body class="min-h-screen bg-[#f7faf9] text-zinc-950 antialiased dark:bg-zinc-950 dark:text-white">
         <div class="relative min-h-screen overflow-x-hidden">
-            <div class="absolute inset-x-0 top-0 -z-10 h-64 bg-[radial-gradient(circle_at_top,#ffb36a33,transparent_60%)] blur-3xl"></div>
-
-            <header class="sticky top-0 z-40 border-b border-white/60 bg-white/80 backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/75">
+            <header class="sticky top-0 z-40 border-b border-zinc-200/70 bg-white/88 backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/75">
                 <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
                     <a href="{{ route('home') }}" class="flex items-center" wire:navigate>
                         <x-app-logo />
