@@ -18,35 +18,99 @@
                         Compare polished rental listings by location, budget, bedrooms, amenities, and viewing readiness without digging through unfinished inventory.
                 </p>
 
-                <div class="mx-auto mt-8 flex max-w-2xl flex-row items-stretch justify-center gap-3">
-                    <div class="w-1/3 min-w-0 rounded-3xl bg-white/75 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8 [&:hover_.stat-icon]:border-sky-600 [&:hover_.stat-icon]:bg-sky-600 [&:hover_.stat-icon]:text-white">
-                        <div class="stat-icon mx-auto grid size-12 place-items-center rounded-full border border-sky-200 bg-white text-sky-700 transition dark:border-sky-300/20 dark:bg-white/5 dark:text-sky-200">
-                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 21V6l8-3 8 3v15" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 21v-7h6v7M8 8h.01M16 8h.01" />
-                            </svg>
+                <div
+                    x-data="{ active: 0, total: 2, timer: null, go(index) { this.active = index }, next() { this.active = (this.active + 1) % this.total }, prev() { this.active = (this.active + this.total - 1) % this.total }, start() { this.timer = setInterval(() => this.next(), 5200) }, stop() { clearInterval(this.timer) } }"
+                    x-init="start()"
+                    x-on:mouseenter="stop()"
+                    x-on:mouseleave="start()"
+                    class="mx-auto mt-8 max-w-2xl"
+                >
+                    <div class="relative overflow-hidden rounded-[1.6rem] bg-white/45 p-2 shadow-[0_18px_48px_rgba(15,23,42,0.06)] dark:bg-white/5">
+                        <div class="flex transition-transform duration-500 ease-out" :style="`transform: translateX(-${active * 100}%);`">
+                            <div class="w-full shrink-0">
+                                <div class="flex flex-row items-stretch justify-center gap-3">
+                                    <div class="w-1/3 min-w-0 rounded-3xl bg-white/80 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8 [&:hover_.stat-icon]:border-sky-600 [&:hover_.stat-icon]:bg-sky-600 [&:hover_.stat-icon]:text-white">
+                                        <div class="stat-icon mx-auto grid size-12 place-items-center rounded-full border border-sky-200 bg-white text-sky-700 transition dark:border-sky-300/20 dark:bg-white/5 dark:text-sky-200">
+                                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 21V6l8-3 8 3v15" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 21v-7h6v7M8 8h.01M16 8h.01" />
+                                            </svg>
+                                        </div>
+                                        <p class="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['listings'] }}</p>
+                                        <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Listings</p>
+                                    </div>
+                                    <div class="w-1/3 min-w-0 rounded-3xl bg-white/80 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8 [&:hover_.stat-icon]:border-sky-600 [&:hover_.stat-icon]:bg-sky-600 [&:hover_.stat-icon]:text-white">
+                                        <div class="stat-icon mx-auto grid size-12 place-items-center rounded-full border border-sky-200 bg-white text-sky-700 transition dark:border-sky-300/20 dark:bg-white/5 dark:text-sky-200">
+                                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 21V7l5-3 5 3v14" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 10h6v11M8 9h.01M8 13h.01M8 17h.01M17 14h.01M17 18h.01" />
+                                            </svg>
+                                        </div>
+                                        <p class="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['cities'] }}</p>
+                                        <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Cities</p>
+                                    </div>
+                                    <div class="w-1/3 min-w-0 rounded-3xl bg-white/80 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8 [&:hover_.stat-icon]:border-sky-600 [&:hover_.stat-icon]:bg-sky-600 [&:hover_.stat-icon]:text-white">
+                                        <div class="stat-icon mx-auto grid size-12 place-items-center rounded-full border border-sky-200 bg-white text-sky-700 transition dark:border-sky-300/20 dark:bg-white/5 dark:text-sky-200">
+                                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 11h18v8M5 11V7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v4M7 11V9h4v2M13 11V9h4v2" />
+                                            </svg>
+                                        </div>
+                                        <p class="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['units'] }}</p>
+                                        <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Units</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="w-full shrink-0">
+                                <div class="flex flex-row items-stretch justify-center gap-3">
+                                    <div class="w-1/3 min-w-0 rounded-3xl bg-white/80 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8 [&:hover_.stat-icon]:border-sky-600 [&:hover_.stat-icon]:bg-sky-600 [&:hover_.stat-icon]:text-white">
+                                        <div class="stat-icon mx-auto grid size-12 place-items-center rounded-full border border-sky-200 bg-white text-sky-700 transition dark:border-sky-300/20 dark:bg-white/5 dark:text-sky-200">
+                                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3l2.4 5 5.5.8-4 3.9.9 5.5-4.8-2.6-4.8 2.6.9-5.5-4-3.9 5.5-.8L12 3Z" />
+                                            </svg>
+                                        </div>
+                                        <p class="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['featured'] }}</p>
+                                        <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Featured</p>
+                                    </div>
+                                    <div class="w-1/3 min-w-0 rounded-3xl bg-white/80 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8 [&:hover_.stat-icon]:border-sky-600 [&:hover_.stat-icon]:bg-sky-600 [&:hover_.stat-icon]:text-white">
+                                        <div class="stat-icon mx-auto grid size-12 place-items-center rounded-full border border-sky-200 bg-white text-sky-700 transition dark:border-sky-300/20 dark:bg-white/5 dark:text-sky-200">
+                                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 5v14M16 5v14" />
+                                            </svg>
+                                        </div>
+                                        <p class="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['propertyTypes'] }}</p>
+                                        <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Types</p>
+                                    </div>
+                                    <div class="w-1/3 min-w-0 rounded-3xl bg-white/80 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8 [&:hover_.stat-icon]:border-sky-600 [&:hover_.stat-icon]:bg-sky-600 [&:hover_.stat-icon]:text-white">
+                                        <div class="stat-icon mx-auto grid size-12 place-items-center rounded-full border border-sky-200 bg-white text-sky-700 transition dark:border-sky-300/20 dark:bg-white/5 dark:text-sky-200">
+                                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16M12 4v16" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h10v10H7z" />
+                                            </svg>
+                                        </div>
+                                        <p class="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['amenities'] }}</p>
+                                        <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Amenities</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <p class="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['listings'] }}</p>
-                        <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Listings</p>
+
+                        <button type="button" x-on:click="prev()" class="absolute left-3 top-1/2 hidden size-9 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-zinc-600 shadow-lg shadow-zinc-950/10 ring-1 ring-zinc-200 transition hover:bg-sky-600 hover:text-white sm:grid dark:bg-zinc-950/80 dark:text-zinc-300 dark:ring-white/10" aria-label="Previous statistics slide">
+                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6" />
+                            </svg>
+                        </button>
+                        <button type="button" x-on:click="next()" class="absolute right-3 top-1/2 hidden size-9 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-zinc-600 shadow-lg shadow-zinc-950/10 ring-1 ring-zinc-200 transition hover:bg-sky-600 hover:text-white sm:grid dark:bg-zinc-950/80 dark:text-zinc-300 dark:ring-white/10" aria-label="Next statistics slide">
+                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
+                            </svg>
+                        </button>
                     </div>
-                    <div class="w-1/3 min-w-0 rounded-3xl bg-white/75 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8 [&:hover_.stat-icon]:border-sky-600 [&:hover_.stat-icon]:bg-sky-600 [&:hover_.stat-icon]:text-white">
-                        <div class="stat-icon mx-auto grid size-12 place-items-center rounded-full border border-sky-200 bg-white text-sky-700 transition dark:border-sky-300/20 dark:bg-white/5 dark:text-sky-200">
-                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 21V7l5-3 5 3v14" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 10h6v11M8 9h.01M8 13h.01M8 17h.01M17 14h.01M17 18h.01" />
-                            </svg>
-                        </div>
-                        <p class="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['cities'] }}</p>
-                        <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Cities</p>
-                    </div>
-                    <div class="w-1/3 min-w-0 rounded-3xl bg-white/75 px-3 py-4 text-center shadow-[0_14px_35px_rgba(15,23,42,0.055)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_45px_rgba(2,132,199,0.16)] dark:bg-white/5 dark:hover:bg-white/8 [&:hover_.stat-icon]:border-sky-600 [&:hover_.stat-icon]:bg-sky-600 [&:hover_.stat-icon]:text-white">
-                        <div class="stat-icon mx-auto grid size-12 place-items-center rounded-full border border-sky-200 bg-white text-sky-700 transition dark:border-sky-300/20 dark:bg-white/5 dark:text-sky-200">
-                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 11h18v8M5 11V7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v4M7 11V9h4v2M13 11V9h4v2" />
-                            </svg>
-                        </div>
-                        <p class="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{{ $marketplaceStats['units'] }}</p>
-                        <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">Units</p>
+
+                    <div class="mt-3 flex items-center justify-center gap-2">
+                        <button type="button" x-on:click="go(0)" class="h-1.5 rounded-full transition-all" :class="active === 0 ? 'w-8 bg-sky-600' : 'w-2 bg-zinc-300 hover:bg-zinc-400 dark:bg-zinc-700'" aria-label="Show marketplace reach statistics"></button>
+                        <button type="button" x-on:click="go(1)" class="h-1.5 rounded-full transition-all" :class="active === 1 ? 'w-8 bg-sky-600' : 'w-2 bg-zinc-300 hover:bg-zinc-400 dark:bg-zinc-700'" aria-label="Show listing quality statistics"></button>
                     </div>
                 </div>
             </div>

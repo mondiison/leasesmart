@@ -90,6 +90,15 @@ class Index extends Component
                 'listings' => $marketplaceTotals->count(),
                 'cities' => $cities->count(),
                 'units' => $marketplaceTotals->sum('public_units_count'),
+                'featured' => $marketplaceTotals->where('is_featured', true)->count(),
+                'propertyTypes' => $marketplaceTotals->pluck('property_type')->unique()->count(),
+                'amenities' => PropertyAmenity::query()
+                    ->where(function (Builder $query): void {
+                        $query
+                            ->whereHas('properties', fn (Builder $propertyQuery) => $propertyQuery->publiclyVisible())
+                            ->orWhereHas('units.property', fn (Builder $propertyQuery) => $propertyQuery->publiclyVisible());
+                    })
+                    ->count(),
             ],
             'propertyTypes' => PropertyType::cases(),
             'amenities' => PropertyAmenity::query()->orderBy('name')->limit(8)->get(),
