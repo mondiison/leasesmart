@@ -24,7 +24,7 @@
                     x-init="timer = setInterval(() => active = (active + 1) % total, 5200)"
                     x-on:mouseenter="clearInterval(timer)"
                     x-on:mouseleave="clearInterval(timer); timer = setInterval(() => active = (active + 1) % total, 5200)"
-                    class="mx-auto mt-8 hidden max-w-2xl sm:block"
+                    class="mx-auto mt-8 max-w-2xl"
                 >
                     <div class="relative overflow-hidden rounded-[1.6rem] bg-white/45 p-2 shadow-[0_18px_48px_rgba(15,23,42,0.06)] dark:bg-white/5">
                         <div class="flex transition-transform duration-500 ease-out" x-bind:style="'transform: translateX(-' + (active * 100) + '%);'">
@@ -109,7 +109,7 @@
                         </button>
                     </div>
 
-                    <div class="mt-3 flex flex-row items-center justify-center gap-2">
+                    <div class="mt-3 hidden flex-row items-center justify-center gap-2 sm:flex">
                         <button type="button" x-on:click="active = 0" class="grid h-5 w-10 place-items-center rounded-full" aria-label="Show marketplace reach statistics">
                             <span class="block h-1.5 rounded-full bg-zinc-300 transition-all dark:bg-zinc-700" x-bind:class="active === 0 ? 'w-8 bg-sky-600 dark:bg-sky-500' : 'w-2 hover:bg-zinc-400'"></span>
                         </button>
