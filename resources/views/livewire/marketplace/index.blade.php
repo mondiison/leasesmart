@@ -112,8 +112,8 @@
     </section>
 
     <section class="mx-auto mt-6 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid min-w-0 gap-5 rounded-[1.8rem] bg-white p-4 shadow-[0_24px_70px_rgba(15,23,42,0.08)] lg:grid-cols-12 lg:p-5 dark:bg-zinc-900/70">
-            <aside class="h-fit rounded-[1.35rem] bg-zinc-50 p-4 shadow-[0_18px_48px_rgba(15,23,42,0.09)] lg:col-span-4 dark:bg-white/6 dark:shadow-[0_18px_48px_rgba(0,0,0,0.24)]">
+        <div class="flex min-w-0 flex-col gap-5 rounded-[1.8rem] bg-white p-4 shadow-[0_24px_70px_rgba(15,23,42,0.08)] lg:flex-row lg:p-5 dark:bg-zinc-900/70">
+            <aside class="h-fit min-w-0 rounded-[1.35rem] bg-zinc-50 p-4 shadow-[0_18px_48px_rgba(15,23,42,0.09)] lg:basis-4/12 dark:bg-white/6 dark:shadow-[0_18px_48px_rgba(0,0,0,0.24)]">
                 <div class="flex items-center justify-between gap-3">
                     <div>
                         <h2 class="text-sm font-semibold text-zinc-950 dark:text-white">Filters</h2>
@@ -192,7 +192,7 @@
                 </div>
             </aside>
 
-            <div class="min-w-0 lg:col-span-8">
+            <div class="min-w-0 lg:basis-8/12">
                 <div class="mb-4 flex flex-col gap-3 rounded-[1.25rem] border border-zinc-200/80 bg-white px-4 py-3 shadow-sm sm:flex-row sm:items-center sm:justify-between dark:border-white/10 dark:bg-white/6">
                     <p class="text-sm font-semibold text-zinc-950 dark:text-white">{{ $properties->total() }} result{{ $properties->total() === 1 ? '' : 's' }}</p>
                     <div class="flex flex-wrap items-center gap-3 text-xs font-semibold text-zinc-600 dark:text-zinc-300">
