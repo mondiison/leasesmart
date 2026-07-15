@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="mt-5 rounded-[1.35rem] bg-white p-2 shadow-[0_18px_50px_rgba(15,23,42,0.08)] dark:bg-zinc-950/70">
+        <div class="mt-5 rounded-[1.35rem] bg-white p-2 shadow-[0_22px_60px_rgba(15,23,42,0.10)] dark:bg-zinc-950/70 dark:shadow-[0_22px_60px_rgba(0,0,0,0.28)]">
             <div class="grid gap-2 md:grid-cols-2 lg:grid-cols-[minmax(260px,1.5fr)_minmax(150px,0.8fr)_minmax(170px,0.9fr)_minmax(150px,0.75fr)_128px] lg:items-center">
                     <label for="search" class="flex min-w-0 items-center gap-2 rounded-2xl px-3 py-2.5 transition focus-within:bg-zinc-50 dark:focus-within:bg-white/5">
                         <svg class="size-5 shrink-0 text-sky-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
@@ -112,8 +112,8 @@
     </section>
 
     <section class="mx-auto mt-6 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid min-w-0 gap-5 rounded-[1.8rem] bg-white p-4 shadow-[0_24px_70px_rgba(15,23,42,0.08)] lg:grid-cols-[270px_minmax(0,1fr)] lg:p-5 dark:bg-zinc-900/70">
-            <aside class="h-fit rounded-[1.35rem] bg-zinc-50 p-4 dark:bg-white/6">
+        <div class="grid min-w-0 gap-5 rounded-[1.8rem] bg-white p-4 shadow-[0_24px_70px_rgba(15,23,42,0.08)] lg:grid-cols-[360px_minmax(0,1fr)] lg:p-5 dark:bg-zinc-900/70">
+            <aside class="h-fit rounded-[1.35rem] bg-zinc-50 p-4 shadow-[0_18px_48px_rgba(15,23,42,0.09)] dark:bg-white/6 dark:shadow-[0_18px_48px_rgba(0,0,0,0.24)]">
                 <div class="flex items-center justify-between gap-3">
                     <div>
                         <h2 class="text-sm font-semibold text-zinc-950 dark:text-white">Filters</h2>
@@ -158,11 +158,11 @@
 
                     <div>
                         <p class="text-xs font-semibold text-zinc-800 dark:text-zinc-100">Property Types</p>
-                        <div class="mt-2 space-y-1.5">
+                        <div class="mt-2 grid grid-cols-3 gap-1.5">
                             @foreach ($propertyTypes as $propertyType)
-                                <label class="flex items-center gap-2.5 rounded-lg bg-white px-3 py-2 text-xs font-medium text-zinc-700 transition hover:bg-sky-50 dark:bg-white/5 dark:text-zinc-200">
-                                    <input type="checkbox" wire:model.live="types" value="{{ $propertyType->value }}" class="size-4 rounded border-zinc-300 text-sky-600 focus:ring-sky-500" />
-                                    <span>{{ $propertyType->label() }}</span>
+                                <label class="flex min-w-0 items-center gap-1.5 rounded-lg bg-white px-2 py-2 text-[11px] font-medium text-zinc-700 transition hover:bg-sky-50 dark:bg-white/5 dark:text-zinc-200">
+                                    <input type="checkbox" wire:model.live="types" value="{{ $propertyType->value }}" class="size-3.5 shrink-0 rounded border-zinc-300 text-sky-600 focus:ring-sky-500" />
+                                    <span class="truncate">{{ $propertyType->label() }}</span>
                                 </label>
                             @endforeach
                         </div>
@@ -170,11 +170,11 @@
 
                     <div>
                         <p class="text-xs font-semibold text-zinc-800 dark:text-zinc-100">Amenities</p>
-                        <div class="mt-2 space-y-1.5">
+                        <div class="mt-2 grid grid-cols-3 gap-1.5">
                             @forelse ($amenities as $amenity)
-                                <label class="flex items-center gap-2.5 rounded-lg bg-white px-3 py-2 text-xs font-medium text-zinc-700 transition hover:bg-sky-50 dark:bg-white/5 dark:text-zinc-200">
-                                    <input type="checkbox" wire:model.live="amenityIds" value="{{ $amenity->id }}" class="size-4 rounded border-zinc-300 text-sky-600 focus:ring-sky-500" />
-                                    <span>{{ $amenity->name }}</span>
+                                <label class="flex min-w-0 items-center gap-1.5 rounded-lg bg-white px-2 py-2 text-[11px] font-medium text-zinc-700 transition hover:bg-sky-50 dark:bg-white/5 dark:text-zinc-200">
+                                    <input type="checkbox" wire:model.live="amenityIds" value="{{ $amenity->id }}" class="size-3.5 shrink-0 rounded border-zinc-300 text-sky-600 focus:ring-sky-500" />
+                                    <span class="truncate">{{ $amenity->name }}</span>
                                 </label>
                             @empty
                                 <p class="text-sm text-zinc-500 dark:text-zinc-400">No amenities available yet.</p>
