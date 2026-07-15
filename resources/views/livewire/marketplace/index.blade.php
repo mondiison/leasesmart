@@ -158,7 +158,7 @@
 
                     <div>
                         <p class="text-xs font-semibold text-zinc-800 dark:text-zinc-100">Property Types</p>
-                        <div class="mt-2 grid grid-cols-3 gap-1.5">
+                        <div class="mt-2 grid grid-cols-1 gap-1.5 min-[520px]:grid-cols-2 lg:grid-cols-3">
                             @foreach ($propertyTypes as $propertyType)
                                 <label class="flex min-w-0 items-center gap-1.5 rounded-lg bg-white px-2 py-2 text-[11px] font-medium text-zinc-700 transition hover:bg-sky-50 dark:bg-white/5 dark:text-zinc-200">
                                     <input type="checkbox" wire:model.live="types" value="{{ $propertyType->value }}" class="size-3.5 shrink-0 rounded border-zinc-300 text-sky-600 focus:ring-sky-500" />
@@ -170,7 +170,7 @@
 
                     <div>
                         <p class="text-xs font-semibold text-zinc-800 dark:text-zinc-100">Amenities</p>
-                        <div class="mt-2 grid grid-cols-3 gap-1.5">
+                        <div class="mt-2 grid grid-cols-1 gap-1.5 min-[520px]:grid-cols-2 lg:grid-cols-3">
                             @forelse ($amenities as $amenity)
                                 <label class="flex min-w-0 items-center gap-1.5 rounded-lg bg-white px-2 py-2 text-[11px] font-medium text-zinc-700 transition hover:bg-sky-50 dark:bg-white/5 dark:text-zinc-200">
                                     <input type="checkbox" wire:model.live="amenityIds" value="{{ $amenity->id }}" class="size-3.5 shrink-0 rounded border-zinc-300 text-sky-600 focus:ring-sky-500" />
