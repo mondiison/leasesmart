@@ -6,7 +6,7 @@
     <body class="min-h-screen bg-[#f7faf9] text-zinc-950 antialiased dark:bg-zinc-950 dark:text-white">
         <div class="relative min-h-screen overflow-x-hidden">
             <header class="sticky top-0 z-40 border-b border-zinc-200/70 bg-white/88 backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/75">
-                <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+                <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
                     <a href="{{ route('home') }}" class="flex items-center" wire:navigate>
                         <x-app-logo />
                     </a>
@@ -25,6 +25,12 @@
                             <a href="{{ route('register') }}" wire:navigate class="rounded-full bg-zinc-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-100">Get Started</a>
                         @endauth
                     </div>
+
+                    <nav class="flex w-full items-center gap-5 border-t border-zinc-200/70 pt-3 text-sm text-zinc-600 md:hidden dark:border-white/10 dark:text-zinc-300">
+                        <a href="{{ route('home') }}" wire:navigate class="transition hover:text-zinc-950 dark:hover:text-white">Home</a>
+                        <a href="{{ route('marketplace.index') }}" wire:navigate class="transition hover:text-zinc-950 dark:hover:text-white">Listings</a>
+                        <a href="{{ route('about') }}" wire:navigate class="transition hover:text-zinc-950 dark:hover:text-white">About</a>
+                    </nav>
                 </div>
             </header>
 
