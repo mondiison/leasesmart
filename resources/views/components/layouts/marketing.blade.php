@@ -14,6 +14,7 @@
                     <nav class="hidden items-center gap-6 text-sm text-zinc-600 md:flex dark:text-zinc-300">
                         <a href="{{ route('home') }}" wire:navigate class="transition hover:text-zinc-950 dark:hover:text-white">Home</a>
                         <a href="{{ route('marketplace.index') }}" wire:navigate class="transition hover:text-zinc-950 dark:hover:text-white">Listings</a>
+                        <a href="{{ route('about') }}" wire:navigate class="transition hover:text-zinc-950 dark:hover:text-white">About</a>
                     </nav>
 
                     <div class="flex items-center gap-3">

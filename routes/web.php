@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 Route::get('/', MarketplaceIndex::class)->name('home');
+Route::view('about', 'about')->name('about');
 Route::get('listings', MarketplaceIndex::class)->name('marketplace.index');
 Route::get('listings/{property:slug}', MarketplaceShow::class)->name('marketplace.show');
 
